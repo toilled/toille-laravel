@@ -15,29 +15,10 @@
         href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
     >
     <link rel="stylesheet" href="{{ asset('pages.css') }}">
+    <livewire:styles/>
 </head>
-
-<body id="root" class="container">
-<nav>
-    <ul>
-        <li>
-            <hgroup><h1 class="title question">Elliot Dickerson</h1>
-                <h2 class="title question">A site to test things</h2></hgroup>
-        </li>
-    </ul>
-    <ul>
-        <li><a href="/" class="active">Home</a></li>
-        <li><a href="/about" class="inactive">About</a></li>
-        <li><a href="/interests" class="inactive">Interests</a></li>
-    </ul>
-</nav>
-<main>
-    <header>
-        <h2 class="title">{{ $title }}</h2>
-    </header>
-    @foreach($body as $paragraph)
-        <p>{!! $paragraph !!}</p>
-    @endforeach
-</main>
+<body>
+<livewire:page-contents/>
+<livewire:scripts/>
 </body>
 </html>

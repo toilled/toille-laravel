@@ -15,10 +15,10 @@
         href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
     >
     <link rel="stylesheet" href="{{ asset('pages.css') }}">
-    <livewire:styles/>
+    @livewireStyles
 </head>
 <body>
-<livewire:page-contents/>
-<livewire:scripts/>
+{{ $slot }}
+@livewireScripts
 </body>
 </html>

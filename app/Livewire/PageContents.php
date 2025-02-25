@@ -10,33 +10,30 @@ use Livewire\Component;
 
 class PageContents extends Component
 {
-    public $links, $title, $body;
+    public $pages, $links, $currentName, $title, $body;
 
     public function render(): View|Application|Factory|\Illuminate\View\View
     {
         return view('livewire.page-contents');
     }
 
-    public function mount(): void
+    public function mount($name = ''): void
     {
-        $pages = Config::get('pages');
+        $this->pages = Config::get('pages');
 
         $this->links = [];
-        foreach ($pages as $link => $page) {
+        foreach ($this->pages as $link => $page) {
             $this->links[$link] = $page['name'];
         }
 
-        $pageContent = $pages[''];
-        $this->title = $pageContent['title'];
-        $this->body = $pageContent['body'];
+        $this->currentName = $name;
+        $this->updated();
     }
 
-    public function changePage($name): void
+    public function updated(): void
     {
-        $pages = Config::get('pages');
-
-        if (isset($pages[$name])) {
-            $pageContent = $pages[$name];
+        if (isset($this->pages[$this->currentName])) {
+            $pageContent = $this->pages[$this->currentName];
         } else {
             abort(404);
         }

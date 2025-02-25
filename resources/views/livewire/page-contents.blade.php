@@ -8,7 +8,7 @@
     </ul>
     <ul>
         @foreach($links as $link => $name)
-            <li><a wire:click="changePage('{{ $link }}')">{{ $name }}</a></li>
+            <li><a href="/{{ $link }}" wire:navigate style="{{ $currentName === $link ? '--pico-color: var(--pico-primary-hover);' : ''  }}">{{ $name }}</a></li>
         @endforeach
     </ul>
 </nav>

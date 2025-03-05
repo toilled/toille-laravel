@@ -1,10 +1,10 @@
-<div id="root" class="container">
+<div id="root" class="container" x-data="{ activity: false, joke: false }">
     <nav>
         <ul>
             <li>
                 <hgroup>
-                    <h1 class="title">Elliot Dickerson</h1>
-                    <h2 class="title">A site to test things</h2>
+                    <h1 class="title" @click="activity = !activity">Elliot Dickerson</h1>
+                    <h2 class="title" @click="joke = !joke">A site to test things</h2>
                 </hgroup>
             </li>
         </ul>
@@ -30,4 +30,16 @@
             <p>{!! $paragraph !!}</p>
         @endforeach
     </main>
+    <footer x-cloak x-transition x-show="activity" @click="$wire.newActivity()">
+        <article>
+            <header>Try this {{ $activity['type'] }} activity</header>
+            {{ $activity['text'] }}
+        </article>
+    </footer>
+    <footer x-cloak x-transition x-show="joke" @click="$wire.newJoke()">
+        <article>
+            <header>Have a laugh!</header>
+            {{ $joke  }}
+        </article>
+    </footer>
 </div>

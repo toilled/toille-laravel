@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class PageContents extends Component
 {
-    public $pages, $links, $currentName, $title, $body;
+    public $pages, $links, $currentName, $title, $body, $activity, $joke;
 
     public function render(): View|Application|Factory|\Illuminate\View\View
     {
@@ -28,6 +28,9 @@ class PageContents extends Component
 
         $this->currentName = $name;
         $this->updated();
+
+        $this->newActivity();
+        $this->newJoke();
     }
 
     public function updated(): void
@@ -40,5 +43,29 @@ class PageContents extends Component
 
         $this->title = $pageContent['title'];
         $this->body = $pageContent['body'];
+    }
+
+    public function newActivity(): void
+    {
+        $json = file_get_contents('https://bored.api.lewagon.com/api/activity');
+        $array = json_decode($json, true);
+
+        $this->activity = ['text' => $array['activity'], 'type' => $array['type']];
+    }
+
+    public function newJoke(): void
+    {
+        $cURLConnection = curl_init();
+
+        curl_setopt($cURLConnection, CURLOPT_URL, 'https://icanhazdadjoke.com/');
+        curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, ['Accept: application/json',]);
+
+        $json = curl_exec($cURLConnection);
+        curl_close($cURLConnection);
+
+        $array = json_decode($json, true);
+
+        $this->joke = $array['joke'];
     }
 }

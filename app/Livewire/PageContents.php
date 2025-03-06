@@ -10,7 +10,19 @@ use Livewire\Component;
 
 class PageContents extends Component
 {
-    public $pages, $links, $currentName, $title, $body, $activity, $joke;
+    public $pages;
+
+    public $links;
+
+    public $currentName;
+
+    public $title;
+
+    public $body;
+
+    public $activity;
+
+    public $joke;
 
     public function render(): View|Application|Factory|\Illuminate\View\View
     {
@@ -59,7 +71,7 @@ class PageContents extends Component
 
         curl_setopt($cURLConnection, CURLOPT_URL, 'https://icanhazdadjoke.com/');
         curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, ['Accept: application/json',]);
+        curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, ['Accept: application/json']);
 
         $json = curl_exec($cURLConnection);
         curl_close($cURLConnection);

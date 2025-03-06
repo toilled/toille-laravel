@@ -17,7 +17,7 @@ class PageContents extends Component
         return view('livewire.page-contents');
     }
 
-    public function mount($name = ''): void
+    public function mount($name = 'home'): void
     {
         $this->pages = Config::get('pages');
 
